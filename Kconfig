@@ -1,0 +1,28 @@
+config SORABBYNGOFS
+    tristate "SorabbyngoFS — AI-native filesystem"
+    depends on BLOCK
+    help
+      AI-native VFS filesystem for Sorabbyngo OS.
+      Provides Zone 3 (AI sandbox) with ByngoPress compression,
+      self-healing journaling, and consent-gated cross-zone access.
+
+      Say M to build as a loadable kernel module (recommended).
+      Say Y to build into the kernel directly.
+
+config SORABBYNGOFS_ENFORCE_CONSENT
+    bool "Enforce Ed25519 consent signature verification"
+    depends on SORABBYNGOFS
+    default n
+    help
+      When enabled, every AI cross-zone file operation must carry
+      a valid Ed25519 signature issued by the CML subsystem.
+
+      Disable during development. MUST be enabled in production builds.
+
+config SORABBYNGOFS_COMPRESS
+    bool "Enable ByngoPress compression in AI zone"
+    depends on SORABBYNGOFS
+    default y
+    help
+      Enables 10000:1 semantic compression for files in /ai-workspace.
+      Requires sorabbyngo-os/byngo-press to be built and linked.
