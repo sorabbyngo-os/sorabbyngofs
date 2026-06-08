@@ -140,7 +140,7 @@ Magic number: `'B'` (0x42)
 | Journal (disk persist + netlink) | TODO |
 | File read/write | Done (skeleton) |
 | ByngoPress compress path | Stub — pending byngo-press kernel API |
-| Inode operations | In progress |
+| Inode operations | Done |
 | Production mount testing | TODO |
 
 ---
