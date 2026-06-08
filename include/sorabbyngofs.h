@@ -110,3 +110,40 @@ extern const struct super_operations  sorabbyngofs_super_ops;
 extern const struct file_operations   sorabbyngofs_file_ops;
 
 #endif /* _SORABBYNGOFS_H */
+
+/* ------------------------------------------------------------------ */
+/*  Netlink heal events — sorabbyngofs_journal.c                       */
+/* ------------------------------------------------------------------ */
+
+#define NETLINK_SORABBYNGO      31
+#define BYNGO_HEAL_HIGH_ACCESS  1
+#define BYNGO_HEAL_DIRTY_MOUNT  2
+#define BYNGO_HEAL_AUTH_FAIL    3
+#define BYNGO_HEAL_JOURNAL_FULL 4
+#define BYNGO_ACCESS_THRESHOLD  10000
+
+struct byngo_heal_event {
+    u32   event_type;
+    u64   inode_no;
+    u64   agent_id;
+    u64   timestamp_ns;
+    u64   value;
+    char  detail[64];
+};
+
+/* netlink lifecycle */
+int  sorabbyngofs_netlink_init(void);
+void sorabbyngofs_netlink_destroy(void);
+
+/* event dispatch */
+void sorabbyngofs_heal_notify(u32 event_type, u64 inode_no,
+                               u64 agent_id, u64 value,
+                               const char *detail);
+void sorabbyngofs_heal_register_daemon(u32 pid);
+
+/* decompress read — sorabbyngofs_compress.c */
+int  sorabbyngofs_decompress_read(struct file *file,
+                                   char __user *buf,
+                                   size_t count,
+                                   const u8 *cdata,
+                                   size_t csize);

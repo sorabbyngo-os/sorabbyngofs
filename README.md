@@ -137,9 +137,9 @@ Magic number: `'B'` (0x42)
 | Consent gate (expiry + perms) | Done |
 | Consent gate (Ed25519 sig) | Stub — pending sorabbyngo-security key export |
 | Journal (in-memory) | Done |
-| Journal (disk persist + netlink) | TODO |
+| Journal (disk persist + netlink) | Done (netlink) — disk persist TODO |
 | File read/write | Done (skeleton) |
-| ByngoPress compress path | Stub — pending byngo-press kernel API |
+| ByngoPress compress path | Contract defined — pending byngo-press export |
 | Inode operations | Done |
 | Production mount testing | TODO |
 

@@ -97,13 +97,15 @@ static int __init sorabbyngofs_init(void)
         return err;
     }
 
-    pr_info("sorabbyngofs: registered successfully\n");
+    sorabbyngofs_netlink_init();
+	pr_info("sorabbyngofs: registered successfully\n");
     return 0;
 }
 
 static void __exit sorabbyngofs_exit(void)
 {
     unregister_filesystem(&sorabbyngofs_type);
+	sorabbyngofs_netlink_destroy();
     sorabbyngofs_inode_cache_destroy();
     pr_info("sorabbyngofs: unregistered\n");
 }
